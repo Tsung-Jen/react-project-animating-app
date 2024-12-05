@@ -45,11 +45,16 @@ export default function ChallengeItem({
             </p>
           </div>
         </header>
-        <div className={`challenge-item-details ${isExpanded ? "expanded" : ""}`}>
+        <div className="challenge-item-details">
           <p>
             <button onClick={onViewDetails}>
               View Details{" "}
-              <span className="challenge-item-details-icon">&#9650;</span>
+              <motion.span
+                animate={{ rotate: isExpanded ? 180 : 0 }}
+                className="challenge-item-details-icon"
+              >
+                &#9650;
+              </motion.span>
             </button>
           </p>
           {/* solve wobbly image problem due to layout prop at motion.li */}
