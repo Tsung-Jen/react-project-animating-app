@@ -42,9 +42,13 @@ export default function Challenges() {
         onSelectType={handleSelectType}
         selectedType={selectedType}
       >
-        <AnimatePresence>
+        <AnimatePresence mode="wait">
           {displayedChallenges.length > 0 && (
-            <motion.ol exit={{ y: -30, opacity: 0 }} className="challenge-items">
+            <motion.ol
+              key="list"
+              exit={{ y: -30, opacity: 0 }}
+              className="challenge-items"
+            >
               <AnimatePresence>
                 {displayedChallenges.map((challenge) => (
                   <ChallengeItem
@@ -57,8 +61,21 @@ export default function Challenges() {
               </AnimatePresence>
             </motion.ol>
           )}
+          {displayedChallenges.length === 0 && (
+            <motion.p
+              key="fullback"
+              // variants={{ hidden: { opacity: 0, y: -20 }, visible: { opacity: 1, y: 0 }}}
+              // initial="hidden"
+              // animate="visible"
+              // exit="hidden"
+              initial={{ opacity: 0, y: -20 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -20 }}
+            >
+              No challenges found.
+            </motion.p>
+          )}
         </AnimatePresence>
-        {displayedChallenges.length === 0 && <p>No challenges found.</p>}
       </ChallengeTabs>
     </div>
   );
